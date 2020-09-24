@@ -1,0 +1,21 @@
+.counter {
+    text-align: center;
+    border: 1px solid;
+    width: 200px;
+    margin-left: 800px;
+    font-size: 50px;
+    padding: 5px;
+}
+
+.finish {
+    color: red;
+    font-size: 50px;
+}
+
+.button-restart {
+    opacity: 0.5;
+}
+
+.button-next {
+    opacity: 0.5;
+}

@@ -1,0 +1,27 @@
+.display {
+    border: 2px solid #61dafb;
+    max-width: 250px;
+    min-height: 80px;
+    margin: 10px auto;
+    background-color: #282c34;
+}
+
+.counter {
+    text-align: center;
+    color: white;
+    font-size: 60px;
+    position: relative;
+    padding-bottom: 5px;
+    transition: transform ease-in 0.1s, box-shadow ease-in 0.25s;
+    box-shadow: 0 2px 25px rgb(201, 215, 199);
+}
+
+.counterFinish {
+    text-align: center;
+    color: #ff0000;
+    font-size: 60px;
+    position: relative;
+    padding-bottom: 5px;
+    transition: transform ease-in 0.1s, box-shadow ease-in 0.25s;
+    box-shadow: 0 2px 25px rgb(255, 0, 0);
+}

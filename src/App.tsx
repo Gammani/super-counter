@@ -1,25 +1,54 @@
 import React, {useState} from 'react';
 import './App.css';
-import {Counter} from "./Counter/Counter";
 import {ControlPanel} from "./ControlPanel/ControlPanel";
+import {BrowserRouter, Route, Redirect} from "react-router-dom";
+import {Setting} from "./setCounter/Setting";
 
 function App() {
-    let [value, setValue] = useState<number>(0);
+    let [startValue, setStartValue] = useState<number>(0);
+    let [endValue, setEndValue] = useState<number>(5);
+    let [counter, setCounter] = useState<number>(startValue);
+
     const iteration = () => {
-        if(value < 5) {
-            return setValue(value + 1);
+        if (startValue < endValue) {
+            return setCounter(counter + 1);
         }
     }
     const reset = () => {
-        const reValue = 0;
-        setValue(reValue);
+        setCounter(startValue);
     }
 
+    const onChangeStartValue = (value: number) => {
+        return setStartValue(value);
+    }
+    const onChangeEndValue = (value: number) => {
+        return setEndValue(value);
+    }
+
+
     return (
-        <div className={"counter"}>
-            <Counter value={value}/>
-            <ControlPanel iteration={iteration} reset={reset} value={value}/>
-        </div>
+        <BrowserRouter>
+            <div className={"app"}>
+                <h1>Счетчик от {startValue} до {endValue}</h1>
+                <div className={"counter"}>
+                    <Route exact path="/" render={() => <Redirect to="/controlPanel"/>}/>
+                    <Route path="/controlPanel" render={() => <ControlPanel
+                        iteration={iteration}
+                        reset={reset}
+                        startValue={startValue}
+                        endValue={endValue}
+                        counter={counter}
+                    />}/>
+                    <Route path='/setting' render={() => <Setting
+                        startValue={startValue}
+                        endValue={endValue}
+                        onChangeStartValue={onChangeStartValue}
+                        onChangeEndValue={onChangeEndValue}
+                        setCounter={setCounter}
+                    />}/>
+                </div>
+            </div>
+        </BrowserRouter>
     )
 }
 

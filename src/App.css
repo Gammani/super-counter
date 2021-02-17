@@ -1,7 +1,11 @@
+.app {
+    text-align: center;
+}
+
 .counter {
     border: 2px solid #61dafb;
-    max-width: 300px;
-    min-height: 170px;
+    max-width: 350px;
+    min-height: 200px;
     margin: 50px auto;
     background-color: #282c34;
     border-radius: 10px;

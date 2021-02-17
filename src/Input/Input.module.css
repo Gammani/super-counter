@@ -1,0 +1,21 @@
+.main {
+    display: flex;
+    align-items: center;
+    font-size: 21px;
+    padding: 10px 30px 10px 10px;
+    margin: 1px 0;
+}
+
+.input {
+    width: 100%;
+    border-style: none;
+    border-radius: 5px;
+    padding: 5px;
+    font-size: 30px;
+    text-align: center;
+    box-shadow: 0 2px 25px rgb(201, 215, 199);
+}
+
+.title {
+    color: white;
+}

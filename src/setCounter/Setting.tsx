@@ -1,5 +1,4 @@
-import React, {useCallback, useEffect, useState} from "react";
-import {useHistory} from 'react-router-dom';
+import React from "react";
 import s from './Setting.module.css'
 import {Input} from "../Input/Input";
 
@@ -9,47 +8,25 @@ type PropsType = {
     onChangeStartValue: (value: number) => void
     onChangeEndValue: (value: number) => void
     setCounter: (value: number) => void
+    redirectControlPanel: () => void
+    errorHandler: () => void
+    error: string
 }
 
 export const Setting: React.FC<PropsType> = (props) => {
 
-    let history = useHistory();
-
-    let [error, setError] = useState<string>("");
-    const errorHandler = useCallback(() => {
-        // if(props.endValue < 1) {
-        //     return setError("Значение не должно равняться нулю!");
-        // } else if (props.startValue > props.endValue) {
-        //     return setError("start, не должен быть выше max!")
-        // } else if (props.startValue === props.endValue) {
-        //     return setError("Значения не должны быть равны!")
-        // }
-        if (props.startValue > props.endValue) {
-            return setError("start, не должен быть выше max!")
-        }
-        return setError("");
-    }, [props.startValue, props.endValue]);
-    useEffect(() => {
-        errorHandler();
-    }, [props.endValue, props.startValue, errorHandler])
-
-
-    const redirectControlPanel = () => {
-        props.setCounter(props.startValue);
-        history.push('/controlPanel');
-    }
 
     return (
         <div className={s.settingPanel}>
             <div>
-                {error !== "" && <div className={s.error}>{error}</div>}
+                {props.error !== "" && <div className={s.error}>{props.error}</div>}
                 <Input title={"Start Value"} value={props.startValue} onChangeValue={props.onChangeStartValue}/>
                 <Input title={"Max Value"} value={props.endValue} onChangeValue={props.onChangeEndValue}/>
             </div>
             <div className={s.set}>
-                <button className={error !== "" ? s.setButtonDis : s.setButton}
-                        disabled={error !== ""}
-                        onClick={redirectControlPanel}>Set</button>
+                <button className={props.error !== "" ? s.setButtonDis : s.setButton}
+                        disabled={props.error !== ""}
+                        onClick={props.redirectControlPanel}>Set</button>
             </div>
         </div>
     )

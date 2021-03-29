@@ -1,9 +1,9 @@
 import React from "react";
 import s from './ControlPanel.module.css';
-import { useHistory } from 'react-router-dom';
 
 type PropsType = {
     iteration: () => void
+    redirectSettings: () => void
     reset: () => void
     startValue: number
     endValue: number
@@ -12,10 +12,9 @@ type PropsType = {
 
 export const ControlPanel: React.FC<PropsType> = (props) => {
 
-    let history = useHistory();
-    const redirectSettings = () => {
-        history.push('/setting')
-    }
+
+
+
 
     return (
         <div className={s.panel}>
@@ -36,7 +35,7 @@ export const ControlPanel: React.FC<PropsType> = (props) => {
                         onClick={props.reset}>reset</button>
             </div>
             <div className={s.set}>
-                <button onClick={redirectSettings}>Set</button>
+                <button onClick={props.redirectSettings}>Set</button>
             </div>
         </div>
     )

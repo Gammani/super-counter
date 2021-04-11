@@ -1,23 +1,24 @@
 import React from 'react';
 import './App.css';
-import ControlPanelContainer from "./ControlPanel/ControlPanelContainer";
 import {Redirect, Route} from "react-router-dom";
-import SettingContainer from "./setCounter/SettingContainer";
+import {useSelector} from "react-redux";
+import {AppRootStateType} from "./redux/redux-store";
+import {ControlPanel} from "./ControlPanel/ControlPanel";
+import {Setting} from "./setCounter/Setting";
 
-type PropsType = {
-    startValue: number
-    endValue: number
-}
 
-function App(props: PropsType) {
+function App() {
+
+    const startValue = useSelector<AppRootStateType, number>(state => state.counter.startValue);
+    const endValue = useSelector<AppRootStateType, number>(state => state.counter.endValue);
 
     return (
         <div className={"app"}>
-            <h1>Счетчик от {props.startValue} до {props.endValue}</h1>
+            <h1>Счетчик от {startValue} до {endValue}</h1>
             <div className={"counter"}>
                 <Route exact path="/" render={() => <Redirect to="/controlPanel"/>}/>
-                <Route path="/controlPanel" render={() => <ControlPanelContainer />}/>
-                <Route path='/setting' render={() => <SettingContainer/>}/>
+                <Route path="/controlPanel" render={() => <ControlPanel />}/>
+                <Route path='/setting' render={() => <Setting/>}/>
             </div>
         </div>
     )

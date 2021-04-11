@@ -28,12 +28,12 @@ type setCounterActionType = {
 }
 
 type CounterReducerActionType =
-    ReturnType<typeof iteration>
-    | ReturnType<typeof reset>
-    | ReturnType<typeof onChangeStartValue>
-    | ReturnType<typeof onChangeEndValue>
-    | ReturnType<typeof errorHandler>
-    | ReturnType<typeof setCounter>
+    ReturnType<typeof iterationAC>
+    | ReturnType<typeof resetAC>
+    | ReturnType<typeof onChangeStartValueAC>
+    | ReturnType<typeof onChangeEndValueAC>
+    | ReturnType<typeof errorHandlerAC>
+    | ReturnType<typeof setCounterAC>
 
 
 type InitialStateType = {
@@ -68,6 +68,9 @@ const counterReducer = (state: InitialStateType = initialState, action: CounterR
             if (state.startValue > state.endValue) {
                 return {...state, error: "start, не должен быть выше max!"}
             }
+            if(state.startValue === state.endValue) {
+                return {...state, error: "Start, не должен быть равен max!"}
+            }
 
             return {...state, error: ""};
         case SETCOUNTER:
@@ -78,34 +81,34 @@ const counterReducer = (state: InitialStateType = initialState, action: CounterR
 }
 
 
-export const iteration = (): IterationActionType => {
+export const iterationAC = (): IterationActionType => {
     return {
         type: ITERATION
     }
 }
-export const reset = (): ResetActionType => {
+export const resetAC = (): ResetActionType => {
     return {
         type: RESET
     }
 }
-export const onChangeStartValue = (value: number): OnChangeStartValueActionType => {
+export const onChangeStartValueAC = (value: number): OnChangeStartValueActionType => {
     return {
         type: ONCHANGESTARTVALUE,
         value
     }
 }
-export const onChangeEndValue = (value: number): OnChangeEndValueActionType => {
+export const onChangeEndValueAC = (value: number): OnChangeEndValueActionType => {
     return {
         type: ONCHANGEENDVALUE,
         value
     }
 }
-export const errorHandler = (): ErrorHandlerActionType => {
+export const errorHandlerAC = (): ErrorHandlerActionType => {
     return {
         type: ERRORHANDLER
     }
 }
-export const setCounter = (value: number): setCounterActionType => {
+export const setCounterAC = (value: number): setCounterActionType => {
     return {
         type: SETCOUNTER,
         value
